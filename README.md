@@ -1,0 +1,2 @@
+# SequelizeMySQL
+Sequelize MySQL
