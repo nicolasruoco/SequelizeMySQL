@@ -1,6 +1,8 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const Handlebars = require('handlebars');
+const moment = require('moment');
 
 // Importando conexão e modelos
 const conn = require('./db/conn');
@@ -9,6 +11,12 @@ const Address = require('./models/Address');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+Handlebars.registerHelper('formatDate', function(date, format) {
+  if (!date) return '';
+  const fmt = typeof format === 'string' ? format : "DD/MM/YYYY";
+  return moment(date).format(fmt);
+});
 
 // Configuração do Handlebars
 app.engine('handlebars', exphbs.engine({
